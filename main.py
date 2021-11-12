@@ -72,7 +72,6 @@ def train(args,net,train_loader, optimizer, scheduler, criterion, epoch):
         
         loss = criterion(output,label_temp)
     
-
         losses.update(loss.item())
         
         loss.backward()

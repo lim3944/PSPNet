@@ -60,21 +60,21 @@ class ADE20K(Dataset):
 def get_dataloader(args):
    
     mean = [0.485, 0.456, 0.406]
-    mean_lst = [item * 255 for item in mean]
+    mean = [item * 255 for item in mean]
     std = [0.229, 0.224, 0.225]
-    std_lst = [item * 255 for item in std]
+    std = [item * 255 for item in std]
 
     train_transform = transform.Compose([
             transform.RandScale([0.5, 2]),
-            transform.RandRotate([-10, 10], padding=mean_lst, ignore_label=0),
+            transform.RandRotate([-10, 10], padding=mean, ignore_label=0),
             transform.RandomHorizontalFlip(),
-            transform.Crop([480, 480], crop_type='rand', padding=mean_lst, ignore_label=0),
+            transform.Crop([480, 480], crop_type='rand', padding=mean, ignore_label=0),
             transform.ToTensor(),
             transform.Normalize(mean=mean, std=std)
             ])
 
     test_transform = transform.Compose([
-            transform.Crop([480, 480], crop_type='center', padding=mean_lst, ignore_label=0),
+            transform.Crop([480, 480], crop_type='center', padding=mean, ignore_label=0),
             transform.ToTensor(),
             transform.Normalize(mean=mean, std=std)
             ])
